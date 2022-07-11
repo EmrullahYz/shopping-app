@@ -1,11 +1,19 @@
 import axios from "axios";
 export default class ProductService {
-  url = "https://fakestoreapi.com/products/";
+  rl = "http://localhost:3000/products/";
 
   getProducts() {
-    return axios.get(url);
+    return axios.request({
+      method: "get",
+      url: this.rl,
+      crossDomain: true,
+    });
   }
   getProductById(id) {
-    return axios.get(url + id);
+    return axios.request({
+      method: "get",
+      url: this.rl + id,
+      crossDomain: true,
+    });
   }
 }

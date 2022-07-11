@@ -15,7 +15,7 @@ export const Navigation1 = () => {
             target="_blank"
           />
         </Menu.Item>
-        <Menu.Menu secondary position="right" size="med">
+        <Menu.Menu position="right" size="med">
           <Menu.Item>Home</Menu.Item>
           <Dropdown
             text="Shopping"

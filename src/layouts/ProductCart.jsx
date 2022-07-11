@@ -1,25 +1,30 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
-import { Card, Icon, Image } from "semantic-ui-react";
+import { Card, Image, Grid } from "semantic-ui-react";
+import ProductService from "./../services/ProductService";
+
 export const ProductCart = () => {
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    const productService = new ProductService();
+    productService.getProducts().then((result) => setProducts(result.data));
+  }, [products]);
+
   return (
-    <div>
-      <Card>
-        <Image src="/images/avatar/large/daniel.jpg" wrapped ui={false} />
-        <Card.Content>
-          <Card.Header>Daniel</Card.Header>
-          <Card.Meta>Joined in 2016</Card.Meta>
-          <Card.Description>
-            Daniel is a comedian living in Nashville.
-          </Card.Description>
-        </Card.Content>
-        <Card.Content extra>
-          <a>
-            <Icon name="user" />
-            10 Friends
-          </a>
-        </Card.Content>
-      </Card>
-    </div>
+    <Grid>
+      <Grid.Row>
+        {products.map((product) => (
+          <Card key={product.id}>
+            <Image src={product.image} wrapped ui={false} size="small" />
+            <Card.Content>
+              <Card.Header>{product.title}</Card.Header>
+              <Card.Meta>{product.price}</Card.Meta>
+              <Card.Description>{product.description}</Card.Description>
+            </Card.Content>
+          </Card>
+        ))}
+      </Grid.Row>
+    </Grid>
   );
 };
